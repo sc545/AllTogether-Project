@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.k.alltogether" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/bubble"
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
+        android:largeHeap="true">
+        <activity
+            android:name=".alltogether.IntroActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="sensorPortrait"
+            android:configChanges="keyboardHidden|orientation|keyboard|screenSize">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".alltogether.MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="sensorPortrait"
+            android:configChanges="keyboardHidden|orientation|keyboard|screenSize"/>
+        <activity
+            android:name=".alltogether.GameStageActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="sensorPortrait"
+            android:configChanges="keyboardHidden|orientation|keyboard|screenSize" />
+        <activity
+            android:name=".alltogether.SelectImageActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="sensorPortrait"
+            android:configChanges="keyboardHidden|orientation|keyboard|screenSize"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustPan" />
+
+    </application>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+</manifest>

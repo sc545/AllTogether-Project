@@ -1,0 +1,115 @@
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.HashMap;
+
+
+public class Server {
+	static String flag = null;
+	public static void main(String[] args) throws Exception {
+		int PORT = 1113;
+		int TIMES = 100;
+		String name=null;
+		int score=0;
+		ServerSocket ss = new ServerSocket(PORT);
+		int i = 1;
+		while(i <= TIMES){
+			int result = 0;
+			System.out.println("소켓 활성화!!");
+			Socket s = ss.accept();
+			System.out.println("소켓 연결!!");
+			OutputStream os = s.getOutputStream();
+			ObjectOutputStream oos = new ObjectOutputStream(os);
+			InputStream is = s.getInputStream();
+			ObjectInputStream ois = new ObjectInputStream(is);
+			
+			flag = (String) ois.readObject();
+			System.out.println(flag);
+			
+			Connection connect=null;
+			Statement st=null;
+			ResultSet rs=null;
+			try{
+				Class.forName("com.mysql.jdbc.Driver");
+			}catch(ClassNotFoundException ce){
+				System.out.println(ce);
+				System.out.println("클래스 로드 불가");
+			}
+			if(flag.equals("read")){
+				try{
+					connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/Alltogether","Alltogether", "");					
+					
+					st = connect.createStatement();
+					rs = st.executeQuery("select * from rank");
+					System.out.println(rs.getString("name"));
+					while(rs.next()){
+						name = rs.getString("name");
+						score = rs.getInt("score");
+						System.out.println(name +" "+ score);
+					}
+					
+					
+					oos.writeObject("ㅅㅂ");
+					oos.writeObject(123);
+					System.out.println(name +" "+ score);
+					
+					if(rs!=null)rs.close();
+					if(st!=null)st.close();
+					if(connect!=null)connect.close();
+					
+				}catch(SQLException se){
+					System.out.println(s);
+				}
+				
+			}
+			System.out.println("1");
+			if(true){
+				System.out.println("2");
+				try{
+					System.out.println("3");
+					connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/Alltogether","Alltogether", "");					
+					
+					st = connect.createStatement();
+					rs = st.executeQuery("select * from rank");
+					System.out.println(rs.getString("name"));
+					while(rs.next()){
+						name = rs.getString("name");
+						score = rs.getInt("score");
+						System.out.println(name +" "+ score);
+					}
+					
+					
+					System.out.println("hi");
+					name = (String) ois.readObject();
+					score = (int) ois.readObject();
+					st.executeUpdate("insert into rank values ('"+name+"', "+score+")");
+					System.out.println("등록완료");
+					
+					if(rs!=null)rs.close();
+					if(st!=null)st.close();
+					if(connect!=null)connect.close();
+					
+				}catch(SQLException se){
+					System.out.println(s);
+				}
+				
+			}
+			
+			
+			s.close();
+			
+		}
+		ss.close();
+		
+	}
+
+}

@@ -1,0 +1,38 @@
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+public class Client {
+	static final String IP = "192.168.53.173"; // 192.168.51.141
+    static int PORT = 1113;
+    
+	public static void main(String[] args) {
+		
+        try {
+        	Socket s = new Socket(IP, PORT);
+            InputStream is = s.getInputStream();
+			ObjectInputStream ois = new ObjectInputStream(is);
+
+			OutputStream os = s.getOutputStream();
+			ObjectOutputStream oos;
+
+			oos = new ObjectOutputStream(os);
+			oos.writeObject("write");
+
+	        oos.writeObject("xyz");
+	        oos.writeObject(54867);
+	        s.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+        
+
+        
+	}
+
+}

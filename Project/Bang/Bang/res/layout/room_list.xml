@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/round4">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:text="Bang !"
+            android:textSize="60sp"
+            android:layout_gravity="left"
+            android:layout_marginRight="320dp"/>
+
+        <Button
+            android:id="@+id/btnRoomListSet"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text=" 설정"
+            android:layout_gravity="right"
+            android:layout_margin="10dp"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:rowCount="3"
+            android:columnCount="2"
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/btnRoomList1"
+                android:layout_width="170dp"
+                android:layout_height="70dp"
+                android:text=" 1번방"
+                android:layout_row="0"
+                android:layout_column="0"/>
+
+            <Button
+                android:id="@+id/btnRoomList2"
+                android:layout_width="170dp"
+                android:layout_height="70dp"
+                android:text=" 2번방"
+                android:layout_row="0"
+                android:layout_column="1"/>
+
+            <Button
+                android:id="@+id/btnRoomList3"
+                android:layout_width="170dp"
+                android:layout_height="70dp"
+                android:text=" 3번방"
+                android:layout_row="1"
+                android:layout_column="0"/>
+
+            <Button
+                android:id="@+id/btnRoomList4"
+                android:layout_width="170dp"
+                android:layout_height="70dp"
+                android:text=" 4번방"
+                android:layout_row="1"
+                android:layout_column="1"/>
+
+            <Button
+                android:id="@+id/btnRoomList5"
+                android:layout_width="170dp"
+                android:layout_height="70dp"
+                android:text=" 5번방"
+                android:layout_row="2"
+                android:layout_column="0"/>
+
+            <Button
+                android:id="@+id/btnRoomList6"
+                android:layout_width="170dp"
+                android:layout_height="70dp"
+                android:text=" 6번방"
+
+                android:layout_row="2"
+                android:layout_column="1"/>
+
+        </GridLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnRoomListCre"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:textColor="#ffffff"
+                android:text=" 게임생성"
+                android:layout_marginTop="15dp"/>
+
+            <Button
+                android:id="@+id/btnRoomListBack"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:text=" 뒤로가기"
+                android:layout_marginTop="50dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

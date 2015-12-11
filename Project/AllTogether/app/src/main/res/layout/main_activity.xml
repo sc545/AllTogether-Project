@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/main_background">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_centerInParent="true"
+        android:id="@+id/iv"/>
+    <ImageView
+        android:layout_width="90dp"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/iv2"/>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_toRightOf="@+id/iv2"
+        android:id="@+id/hide"/>
+    <ImageButton
+        android:id="@+id/btnStart"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_below="@+id/iv"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/start_selector" />
+    <ImageButton
+        android:id="@+id/btnHowTo"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_toLeftOf="@+id/iv2"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="230dp"
+        android:background="@drawable/how_to_selector"/>
+    <ImageButton
+        android:id="@+id/btnSetting"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_toLeftOf="@+id/iv2"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="110dp"
+        android:background="@drawable/setting_selector" />
+
+    <ImageButton
+        android:id="@+id/btnRank"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/btnStart"
+        android:layout_toRightOf="@+id/btnSetting"
+
+        android:background="@drawable/rank_selector"/>
+
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/round4">
+    
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:text="Credit"
+            android:textSize="50dp"
+            android:layout_gravity="center"/>
+
+
+
+
+
+    </LinearLayout>
+
+
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_marginTop="50dp"
+                android:text="크레딧크레딧크레딧크레딧크레딧크레딧크레딧크레딧크레딧크레딧크레딧크레딧크레딧
+				크레딧크레딧크레딧크레딧크레딧크레딧크레딧크레딧크레\n\n\n\n\n딧크레딧크레딧크레딧크레딧크레딧
+				크레딧크레딧크레딧크레딧크레딧크레딧크레딧크레딧크레딧크레딧크레딧크레딧\n\n\n\n크레딧크레딧
+				크레딧크레딧크레딧크레딧크레딧크레딧크레딧크레딧크레딧크레딧크레딧"
+                android:textSize="30dp"/>
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>

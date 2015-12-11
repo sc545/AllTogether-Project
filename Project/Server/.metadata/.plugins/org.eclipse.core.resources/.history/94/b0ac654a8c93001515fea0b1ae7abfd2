@@ -1,0 +1,111 @@
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+
+public class Server {
+	static private String driverName = "com.mysql.jdbc.Driver";
+	private static String url = "jdbc:mysql://localhost:3306/test?useUnicode=yes&characterEncoding=UTF-8";
+	private static String userName = "Alltogether";
+	private static String passwd = "";
+	public static void main(String[] args) throws Exception {
+		int PORT = 1113;
+		String name[] = new String[10];
+		int score[] = new int[10];
+		
+		while(true){
+			ServerSocket ss = new ServerSocket(PORT);
+			System.out.println("소켓 활성화!!");
+			Socket s = ss.accept();
+			System.out.println("소켓 연결!!");
+			OutputStream os = s.getOutputStream();
+			ObjectOutputStream oos = new ObjectOutputStream(os);
+			InputStream is = s.getInputStream();
+			ObjectInputStream ois = new ObjectInputStream(is);
+			
+			String flag = (String) ois.readObject();
+			System.out.println(flag);
+			
+			Connection connect=null;
+			Statement st=null;
+			ResultSet rs=null;
+			try{
+				Class.forName(driverName);
+			}catch(ClassNotFoundException ce){
+				System.out.println(ce);
+				System.out.println("클래스 로드 불가");
+			}
+			if(flag.equals("read")){
+				System.out.println("랭킹 검색");
+				try{
+					connect = DriverManager.getConnection(url, userName, passwd);					
+					
+					st = connect.createStatement();
+					st.executeUpdate("set names euckr");
+					rs = st.executeQuery("select * from rank order by score desc");
+					for(int i=0; i<10; i++){
+						if(rs.next()){
+							name[i] = rs.getString("name");
+							score[i] = rs.getInt("score");
+							System.out.println(name +" "+ score);
+						}else{
+							name[i] = null;
+							score[i] = 0;
+						}
+						
+					}
+					
+					oos.writeObject(name);
+					oos.writeObject(score);
+					
+					
+					if(rs!=null)rs.close();
+					if(st!=null)st.close();
+					if(connect!=null)connect.close();
+					
+				}catch(SQLException se){
+					System.out.println(se);
+				}
+				
+			}
+			if(flag.equals("write")){
+				System.out.println("랭킹 등록");
+				try{
+					connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/test","Alltogther", "");					
+					st = connect.createStatement();
+					rs = st.executeQuery("select * from rank");
+					
+					String tmpName = (String) ois.readObject();
+					int tmpScore = (int) ois.readObject();
+					
+					st.executeUpdate("insert into rank values ('"+tmpName+"', "+tmpScore+")");
+					System.out.println(name+" "+score);
+					System.out.println("등록완료");
+					
+					if(rs!=null)rs.close();
+					if(st!=null)st.close();
+					if(connect!=null)connect.close();
+					
+				}catch(SQLException se){
+					System.out.println(se);
+				}
+				
+			}
+			
+			
+			s.close();
+			ss.close();
+			
+		}
+		
+	}
+
+}

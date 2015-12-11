@@ -1,0 +1,71 @@
+package com.example.bang.thread;
+
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.net.InetAddress;
+import java.net.Socket;
+
+import com.example.bang.Main;
+
+import android.content.Context;
+import android.content.Intent;
+import android.os.Handler;
+import android.widget.EditText;
+import android.widget.Toast;
+
+public class LoginSocketThread extends Thread {
+	public static final String IP = "192.168.219.100";//192.168.219.100
+	public static final int PORT = 1118;
+	String id, passwd;
+	EditText et;
+	Handler handler;
+	Context co;
+	static String server;
+	
+	public LoginSocketThread(String id, String passwd, Context co) {
+		this.id = id;
+		this.passwd = passwd;
+		this.co = co;
+		handler = new Handler();
+	}
+
+	public void run() {
+		
+		try {
+			Socket c = new Socket(IP, PORT);
+			InputStream is = c.getInputStream();// 데이터 받음
+			ObjectInputStream ois = new ObjectInputStream(is);// 데이터 받음
+			
+			OutputStream os = c.getOutputStream(); // 데이터 보냄
+			ObjectOutputStream oos = new ObjectOutputStream(os);// 데이터 보냄
+			
+			oos.writeObject("Login");// 서버로 로그인처리라고알림
+			
+			oos.writeObject(id);// 서버로 아이디 전송
+			oos.writeObject(passwd);// 서버로 비밀번호 전송
+			
+			final String result = (String) ois.readObject();
+
+			c.close();
+
+			handler.post(new Runnable() {
+				public void run() {
+					if (result.equals("ok")) {
+						Intent intent = new Intent(co, Main.class);co.startActivity(intent);
+					} else {
+						Toast.makeText(co, "아이디 또는 암호가 틀렸습니다", Toast.LENGTH_SHORT).show();
+					}
+				}
+			});
+
+		}
+		catch (Exception e) {
+		}
+		
+		
+
+	}
+
+}
